@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textLayoutSearch"
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/search_by_city_name"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewBtn"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardViewBtn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewBtn"
+        android:layout_width="55dp"
+        android:layout_height="58dp"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:src="@drawable/round_search_24" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLayoutSearch"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/tvDataNotFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:text="No Data Found or City Name Wrong"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progress"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLayoutSearch"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgLocation"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/outline_location_on_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLocationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgLocation"
+                app:layout_constraintStart_toEndOf="@+id/imgLocation"
+                app:layout_constraintTop_toTopOf="@+id/imgLocation"
+                tools:text="Location Name" />
+
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="80sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgLocation"
+                tools:text="48 C" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgTempCondition"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/outline_cloud_24"
+                app:layout_constraintEnd_toEndOf="@+id/tvTemp"
+                app:layout_constraintStart_toStartOf="@+id/tvTemp"
+                app:layout_constraintTop_toBottomOf="@+id/tvTemp" />
+
+            <TextView
+                android:id="@+id/tvLocationDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/imgTempCondition"
+                app:layout_constraintStart_toStartOf="@+id/imgTempCondition"
+                app:layout_constraintTop_toBottomOf="@+id/imgTempCondition"
+                tools:text="Location Name" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:constraint_referenced_ids="cardViewHumidity,cardViewVisibility,cardViewWind,cardViewTimeZone,cardViewLat,cardViewLong"
+                app:flow_horizontalGap="10dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalAlign="top"
+                app:flow_verticalGap="20dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLocationDateTime" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewHumidity"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView style="@style/cardViewTextView" />
+
+                    <TextView
+                        android:id="@+id/tvHumidity"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewVisibility"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="@string/visibility" />
+
+                    <TextView
+                        android:id="@+id/tvVisibility"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewWind"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="@string/wind" />
+
+                    <TextView
+                        android:id="@+id/tvWind"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewTimeZone"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="@string/time_zone_name" />
+
+                    <TextView
+                        android:id="@+id/tvTimeZone"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewLat"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="@string/latitude" />
+
+                    <TextView
+                        android:id="@+id/tvLat"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewLong"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="@string/longitude" />
+
+                    <TextView
+                        android:id="@+id/tvLong"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:constraint_referenced_ids="cardViewCo,cardViewNO2,cardViewO3,cardViewSO2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flow1" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewCo"
+                style="@style/cardView1">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="CO" />
+
+                    <TextView
+                        android:id="@+id/tvCo"
+                        android:text="257.3 (μg/m3)"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewNO2"
+                style="@style/cardView1">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="NO2" />
+
+                    <TextView
+                        android:id="@+id/tvNO2"
+                        android:text="257.3 (μg/m3)"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewO3"
+                style="@style/cardView1">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="O3" />
+
+                    <TextView
+                        android:id="@+id/tvO3"
+                        android:text="257.3 (μg/m3)"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewSO2"
+                style="@style/cardView1">
+
+                <LinearLayout style="@style/cardViewLinearLayout">
+
+                    <TextView
+                        style="@style/cardViewTextView"
+                        android:text="SO2" />
+
+                    <TextView
+                        android:id="@+id/tvSO2"
+                        android:text="257.3 (μg/m3)"
+                        style="@style/cardViewTextViewValue" />
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

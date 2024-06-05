@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DemoWeatherKotlin</string>
+    <string name="search_by_city_name">Search By City Name</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+    <string name="wind">Wind</string>
+    <string name="time_zone_name">Time Zone Name</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+</resources>
